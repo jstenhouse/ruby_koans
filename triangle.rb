@@ -16,12 +16,20 @@
 require 'set'
 
 def triangle(a, b, c)
+  validate_sides!(a, b, c)
   set = Set.new([a, b, c])
   case set.size
     when 1 then :equilateral
     when 2 then :isosceles
     else :scalene
   end
+end
+
+def validate_sides!(a, b, c)
+  sides = [a, b, c]
+  raise TriangleError if sides.min <= 0
+  x, y, z = sides.sort
+  raise TriangleError if x + y <= z
 end
 
 # Error class used in part 2.  No need to change this code.
