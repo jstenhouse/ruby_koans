@@ -13,8 +13,15 @@
 # and
 #   about_triangle_project_2.rb
 #
+require 'set'
+
 def triangle(a, b, c)
-  # WRITE THIS CODE
+  set = Set.new([a, b, c])
+  case set.size
+    when 1 then :equilateral
+    when 2 then :isosceles
+    else :scalene
+  end
 end
 
 # Error class used in part 2.  No need to change this code.
