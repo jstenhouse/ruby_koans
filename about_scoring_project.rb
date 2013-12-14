@@ -29,8 +29,8 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 #
 # Your goal is to write the score method.
 
-def points_for(count, die_side)
-  points = 0
+def points_for(die_side, count)
+  points = 0  
   if die_side == 1
     points += (count / 3) * 1000
     points += (count % 3) * 100
@@ -46,12 +46,14 @@ end
 def score(dice)
   # You need to write this method
   points = 0
-  counts = Array.new(7, 0)
   
-  dice.each { |die| counts[die] += 1 }
+  counts = dice.inject(Hash.new(0)) { |hash, i| hash[i] +=1; hash }
   
-  counts.each_with_index do |count, die_side|
-    points += points_for(count, die_side)
+  # vs counts = Hash.new(0)
+  #    dice.each { |die| counts[die] += 1 }
+  
+  counts.each do |die_side, count|
+    points += points_for(die_side, count)
   end
 
   points
