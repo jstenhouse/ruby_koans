@@ -30,7 +30,7 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 # Your goal is to write the score method.
 
 def points_for(die_side, count)
-  points = 0  
+  points = 0
   case die_side
   when 1
     points += (count / 3) * 1000
@@ -46,19 +46,26 @@ end
 
 def score(dice)
   # You need to write this method
-  points = 0
-  
-  counts = Hash.new(0)
-  dice.each { |die| counts[die] += 1 }
+  # points = 0
+
+  # counts = Hash.new(0)
+  # dice.each { |die| counts[die] += 1 }
+
+  # counts = Hash[ dice.map { |die| [die, dice.count(die)] } ]
 
   # vs
   # counts = dice.inject(Hash.new(0)) { |hash, i| hash[i] += 1; hash }
-  
-  counts.each do |die_side, count|
-    points += points_for(die_side, count)
-  end
 
-  points
+  # counts.each do |die_side, count|
+    # points += points_for(die_side, count)
+  # end
+
+  # counts.inject(0) { |sum, (die, count)| sum + points_for(die, count)}
+  # points
+
+  # This is not the most efficient approach, since we iterate over the collection of
+  # dice every time dice.count is called, but it is very concise. :-)
+  dice.uniq.inject(0) { |sum, die| sum + points_for(die, dice.count(die)) }
 end
 
 class AboutScoringProject < Neo::Koan
@@ -102,4 +109,8 @@ class AboutScoringProject < Neo::Koan
     assert_equal 1150, score([1,1,1,5,1])
   end
 
+end
+
+AboutScoringProject.instance_methods(false).each do |meth|
+  AboutScoringProject.new({}).send(meth)
 end
