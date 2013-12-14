@@ -110,7 +110,3 @@ class AboutScoringProject < Neo::Koan
   end
 
 end
-
-AboutScoringProject.instance_methods(false).each do |meth|
-  AboutScoringProject.new({}).send(meth)
-end
