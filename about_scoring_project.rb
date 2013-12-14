@@ -31,10 +31,11 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 def points_for(die_side, count)
   points = 0  
-  if die_side == 1
+  case die_side
+  when 1
     points += (count / 3) * 1000
     points += (count % 3) * 100
-  elsif die_side == 5
+  when 5
     points += (count / 3) * 100 * 5
     points += (count % 3) * 50
   else
