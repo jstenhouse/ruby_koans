@@ -47,10 +47,11 @@ def score(dice)
   # You need to write this method
   points = 0
   
-  counts = dice.inject(Hash.new(0)) { |hash, i| hash[i] +=1; hash }
-  
-  # vs counts = Hash.new(0)
-  #    dice.each { |die| counts[die] += 1 }
+  counts = Hash.new(0)
+  dice.each { |die| counts[die] += 1 }
+
+  # vs
+  # counts = dice.inject(Hash.new(0)) { |hash, i| hash[i] += 1; hash }
   
   counts.each do |die_side, count|
     points += points_for(die_side, count)
